@@ -117,6 +117,7 @@ local snippets = {
     \caption{$3}
 	\label{tab:$4}
 \end{table}]]),
+  -- friendly-snippets intentionally wins the equal-priority "item" trigger.
   at_line_begin("item", "Itemize", [[\begin{itemize}
 	\item $0
 \end{itemize}]]),
@@ -127,6 +128,7 @@ local snippets = {
   at_line_begin("eqn", "Equation without a number", [[\begin{equation*}
 	${0:${LS_SELECT_RAW}}
 \end{equation*}]]),
+  -- friendly-snippets intentionally wins the equal-priority "ali" trigger.
   at_line_begin("ali", "Align", [[\begin{align}
 	${1:${LS_SELECT_RAW}}
 \end{align}]]),
@@ -159,6 +161,7 @@ $0
     $0 \arrow[swap]{r}{f}
 \end{tikzcd}
 \end{equation*}]], true),
+  -- Spacing updates on jump/InsertLeave; per-keystroke updates are intentionally deferred.
   s({ trig = "mk", name = "Math", snippetType = "autosnippet" }, {
     t("$"),
     i(1),
@@ -181,7 +184,7 @@ $0]]),
     [[\v((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)/]],
     "symbol frac",
     [[\frac{${LS_CAPTURE_1}}{$1}$0]],
-    { trigEngine = "vim", hidden = true, wordTrig = false }
+    { trigEngine = "vim", hidden = true }
   ),
   s({
     trig = "^.*%)/",
@@ -201,13 +204,11 @@ $0]]),
   math_auto([[\v([A-Za-z])(\d)]], "auto subscript", "${LS_CAPTURE_1}_${LS_CAPTURE_2}", {
     trigEngine = "vim",
     hidden = true,
-    wordTrig = false,
     priority = 2000,
   }),
   math_auto([[\v([A-Za-z])_(\d\d)]], "auto subscript2", "${LS_CAPTURE_1}_{${LS_CAPTURE_2}}", {
     trigEngine = "vim",
     hidden = true,
-    wordTrig = false,
     priority = 2000,
   }),
   auto("==", "equals", [[&= $1 \\]], { wordTrig = false, priority = 2000 }),

@@ -7,7 +7,8 @@ same home mirror when they are needed.
 ## Install
 
 Requirements: Git and Neovim 0.12 or newer. Tree-sitter parsers also require
-`curl`, `tree-sitter-cli` 0.26.1 or newer, a C compiler, ripgrep, and lazygit.
+`curl`, `tree-sitter-cli` 0.26.1 or newer, a C compiler (LLVM/Clang plus
+Chocolatey's Strawberry Perl toolchain on Windows), ripgrep, and lazygit.
 VimTeX requires a TeX distribution with `latexmk`; on Windows, SumatraPDF and
 `nvr` provide PDF forward/inverse search. Mason's JavaScript and Python
 language servers also require `npm`; run `:checkhealth mason` to verify its

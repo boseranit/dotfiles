@@ -1,10 +1,26 @@
 return {
   {
     "neovim-treesitter/nvim-treesitter",
+    branch = "main",
     lazy = false,
     build = ":TSUpdate",
     dependencies = { "neovim-treesitter/treesitter-parser-registry" },
     config = function()
+      if vim.fn.has("win32") == 1 and (vim.env.CC == nil or vim.env.CC == "") then
+        local clang = vim.fn.exepath("clang")
+        if clang ~= "" then
+          vim.env.CC = clang
+          vim.env.CXX = vim.fn.exepath("clang++")
+
+          local strawberry = "C:/Strawberry/c"
+          if vim.fn.isdirectory(strawberry) == 1 then
+            local mingw_flags = "--target=x86_64-w64-windows-gnu --gcc-toolchain=" .. strawberry
+            vim.env.CFLAGS = mingw_flags
+            vim.env.CXXFLAGS = mingw_flags
+          end
+        end
+      end
+
       require("nvim-treesitter").install({
         "c",
         "cpp",

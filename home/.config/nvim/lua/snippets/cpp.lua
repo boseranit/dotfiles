@@ -15,6 +15,7 @@ local function in_word(trig, name, body)
   return parse({ trig = trig, name = name, wordTrig = false }, body)
 end
 
+-- friendly-snippets intentionally wins equal-priority for/while/if/else triggers.
 return {
   beginning("for", "for loop", [[for (int ${1:i}=${2:0}; $1<${3:n}; ++$1) {
     $0
