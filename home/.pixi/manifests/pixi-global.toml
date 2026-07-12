@@ -1,0 +1,16 @@
+version = 1
+
+[envs.cli]
+channels = ["conda-forge"]
+dependencies = { jq = "*", ripgrep = "*", fd-find = "*", lazygit = "*", tree-sitter-cli = "0.26.*" }
+exposed = { jq = "jq", rg = "rg", fd = "fd", lazygit = "lazygit", tree-sitter = "tree-sitter" }
+
+[envs.node]
+channels = ["conda-forge"]
+dependencies = { nodejs = "24.*" }
+exposed = { node = "node", npm = "npm", npx = "npx", corepack = "corepack" }
+
+[envs.zig]
+channels = ["conda-forge"]
+dependencies = { zig = "0.16.*" }
+exposed = { zig = "zig" }

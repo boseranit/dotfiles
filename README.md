@@ -1,55 +1,90 @@
 # dotfiles
 
-Minimal, reproducible dotfiles. The repository currently owns the Neovim
-configuration at `home/.config/nvim`; other applications can be added to the
-same home mirror when they are needed.
+Minimal, reproducible configuration for Debian, WSL Debian, and Windows where
+the same configuration is useful. The repository records desired state; it
+does not try to turn every application into a bespoke installer.
 
-## Install
+## Sources of truth
 
-Requirements: Git and Neovim 0.12 or newer. Tree-sitter parsers also require
-`curl`, `tree-sitter-cli` 0.26.1 or newer, a C compiler (LLVM/Clang plus
-Chocolatey's Strawberry Perl toolchain on Windows), ripgrep, and lazygit.
-VimTeX requires a TeX distribution with `latexmk`; on Windows, SumatraPDF and
-`nvr` provide PDF forward/inverse search. Mason's JavaScript and Python
-language servers also require `npm`; run `:checkhealth mason` to verify its
-platform tools.
+| Concern | Source of truth |
+| --- | --- |
+| Shell, Neovim, tmux, and Git configuration | `home/` |
+| Portable CLI tools such as Zig and jq | `home/.pixi/manifests/pixi-global.toml` |
+| Essential OS packages | `packages/system/<distribution>.txt` |
+| Upstream standalone installers | `packages/standalone.md` |
+| Per-machine choices and exceptions | `machines/<machine>.md` |
+| Services such as Immich and Seafile | A separate `homelab` repository |
+| Secrets, data, caches, and installed binaries | Outside Git |
 
-Clone the repository as `dotfiles`, then run the bootstrap for your platform:
+`home/` mirrors paths below `$HOME`. Bootstrap links only the files and
+application directories owned by this repository, backing up conflicts first.
+It deliberately does not install packages or services.
+
+## Debian / WSL Debian setup
+
+Install the small OS-level base:
 
 ```sh
-git clone https://github.com/boseranit/dotfiles.git "$HOME/dotfiles"
-cd "$HOME/dotfiles"
-bash bootstrap.sh
+sudo apt-get update
+grep -Ev '^\s*(#|$)' packages/system/debian.txt |
+  xargs sudo apt-get install -y
 ```
+
+Install the standalone tools listed in [packages/standalone.md](packages/standalone.md),
+including Pixi and Neovim, then deploy the configuration:
+
+```sh
+./bootstrap.sh
+pixi global sync
+nvim --headless '+Lazy! sync' +qa
+```
+
+Git identity is intentionally machine-local. Create `~/.gitconfig.local` after
+bootstrapping:
+
+```ini
+[user]
+    name = Your Name
+    email = you@example.com
+```
+
+See [machines/wsl-debian.md](machines/wsl-debian.md) for this machine and
+[home/.config/nvim/README.md](home/.config/nvim/README.md) for editor details.
+
+## Windows setup
+
+Install Git, Pixi, and the pinned Neovim release recorded in
+[packages/standalone.md](packages/standalone.md). Native Tree-sitter parser
+builds also need LLVM Clang and Strawberry Perl in their default locations;
+Mason needs 7-Zip. Then clone the repository on the same drive as `$HOME` and
+run from PowerShell:
 
 ```powershell
 git clone https://github.com/boseranit/dotfiles.git "$HOME\dotfiles"
 Set-Location "$HOME\dotfiles"
 .\bootstrap.ps1
+pixi global sync
+nvim --headless "+Lazy! sync" +qa
 ```
 
-If this repository is already checked out directly at `%LOCALAPPDATA%\nvim`,
-move it first so the repository and deployed configuration are separate:
+The PowerShell bootstrap maps Neovim to `%LOCALAPPDATA%\nvim` and deploys the
+portable home files that are meaningful on Windows. Existing targets receive a
+timestamped backup. It uses a directory junction for Neovim and hard links for
+individual files, so it does not require elevation or Developer Mode.
 
-```powershell
-Set-Location $HOME
-Move-Item "$env:LOCALAPPDATA\nvim" "$HOME\dotfiles"
-Set-Location "$HOME\dotfiles"
-.\bootstrap.ps1
+## Repository layout
+
+```text
+.
+├── bootstrap.sh
+├── bootstrap.ps1
+├── home/
+│   ├── .bashrc
+│   ├── .gitconfig
+│   ├── .config/{nvim,shell,tmux}/
+│   └── .pixi/manifests/pixi-global.toml
+├── packages/
+│   ├── system/debian.txt
+│   └── standalone.md
+└── machines/
 ```
-
-The bootstrap only creates the Neovim configuration link. If a configuration
-already exists, it is moved to a timestamped backup first. Plugins are then
-installed automatically by lazy.nvim on the first Neovim start.
-
-Run `:checkhealth` after installation. Useful entry points include:
-
-- `<C-n>`: open Oil in a floating window
-- `-`: open the parent directory in Oil
-- `<leader>ff`, `<leader>fg`, `<leader>fb`: Telescope files, grep, buffers
-- `<leader>gg`: LazyGit
-- `<Tab>` / `<S-Tab>`: expand or move through snippets
-
-Custom C++ and LaTeX snippets live in `lua/snippets`. LaTeX snippets retain
-their VimTeX math-zone conditions, automatic and regex triggers, priorities,
-and visual-selection behavior.
