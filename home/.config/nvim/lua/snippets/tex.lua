@@ -1,3 +1,7 @@
+if vim.g.dotfiles_latex == false then
+  return {}, {}
+end
+
 local ls = require("luasnip")
 local conditions = require("luasnip.extras.conditions.expand")
 local parse = ls.parser.parse_snippet

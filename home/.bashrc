@@ -15,8 +15,10 @@ export PATH
 
 [[ -r "$HOME/.config/shell/aliases.sh" ]] &&
   source "$HOME/.config/shell/aliases.sh"
-[[ -r "$HOME/.config/shell/local.sh" ]] &&
-  source "$HOME/.config/shell/local.sh"
+[[ -r "$HOME/.config/dotfiles/machine/shell.sh" ]] &&
+  source "$HOME/.config/dotfiles/machine/shell.sh"
+[[ -r "$HOME/.config/dotfiles/local/shell.sh" ]] &&
+  source "$HOME/.config/dotfiles/local/shell.sh"
 
 if [[ -x /usr/bin/dircolors ]]; then
   eval "$(dircolors -b)"

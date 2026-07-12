@@ -44,3 +44,18 @@ Useful mappings include:
 - `<Tab>` / `<S-Tab>`: expand or move through snippets
 
 Custom C++ and LaTeX snippets live under `lua/snippets`.
+
+The clipboard provider is selected at runtime: tmux inside tmux, OSC 52 for a
+direct display-less SSH session, and the native provider otherwise. With
+`unnamedplus`, ordinary yanks copy through the selected provider.
+
+## Machine-local settings
+
+Tracked machine differences belong in the selected profile's `nvim.lua`.
+Private settings belong in `~/.config/dotfiles/local/nvim.lua`, outside the
+repository. For example, either file can disable VimTeX and its custom TeX
+snippets with:
+
+```lua
+vim.g.dotfiles_latex = false
+```

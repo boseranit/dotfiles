@@ -1,6 +1,7 @@
 return {
   {
     "lervag/vimtex",
+    enabled = vim.g.dotfiles_latex ~= false,
     lazy = false,
     init = function()
       vim.g.tex_flavor = "latex"

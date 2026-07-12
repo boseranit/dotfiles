@@ -9,20 +9,22 @@ does not try to turn every application into a bespoke installer.
 | Concern | Source of truth |
 | --- | --- |
 | Shell, Neovim, tmux, and Git configuration | `home/` |
-| Portable CLI tools such as Zig and jq | `home/.pixi/manifests/pixi-global.toml` |
+| Portable CLI tools such as jq and ripgrep | `home/.pixi/manifests/pixi-global.toml` |
 | Essential OS packages | `packages/system/<distribution>.txt` |
 | Upstream standalone installers | `packages/standalone.md` |
-| Per-machine choices and exceptions | `machines/<machine>.md` |
+| Sparse per-machine differences | `machines/<machine>/` |
 | Services such as Immich and Seafile | A separate `homelab` repository |
 | Secrets, data, caches, and installed binaries | Outside Git |
 
-`home/` mirrors paths below `$HOME`. Bootstrap links only the files and
-application directories owned by this repository, backing up conflicts first.
-It deliberately does not install packages or services.
+`home/` mirrors shared paths below `$HOME`. Bootstrap links those paths plus
+one explicitly selected sparse machine profile, backing up conflicts first.
+The selection is remembered as a symlink at
+`~/.config/dotfiles/machine`. Bootstrap deliberately does not install packages
+or services.
 
 ## Debian / WSL Debian setup
 
-Install the small OS-level base:
+Install the small shared OS-level base:
 
 ```sh
 sudo apt-get update
@@ -30,17 +32,25 @@ grep -Ev '^\s*(#|$)' packages/system/debian.txt |
   xargs sudo apt-get install -y
 ```
 
+On WSL, also install its sparse package additions:
+
+```sh
+grep -Ev '^\s*(#|$)' machines/wsl-debian/packages/debian.txt |
+  xargs sudo apt-get install -y
+```
+
 Install the standalone tools listed in [packages/standalone.md](packages/standalone.md),
 including Pixi and Neovim, then deploy the configuration:
 
 ```sh
-./bootstrap.sh
+./bootstrap.sh --machine wsl-debian
 pixi global sync
 nvim --headless '+Lazy! sync' +qa
 ```
 
-Git identity is intentionally machine-local. Create `~/.gitconfig.local` after
-bootstrapping:
+Later bootstrap runs reuse the selected profile, so `--machine` is optional.
+Non-secret Git identity may be tracked in a profile's `gitconfig`. Private Git
+configuration belongs in `~/.config/dotfiles/local/gitconfig`:
 
 ```ini
 [user]
@@ -48,7 +58,9 @@ bootstrapping:
     email = you@example.com
 ```
 
-See [machines/wsl-debian.md](machines/wsl-debian.md) for this machine and
+Existing `~/.gitconfig.local` files remain supported for compatibility.
+
+See [machines/wsl-debian](machines/wsl-debian/README.md) for this machine and
 [home/.config/nvim/README.md](home/.config/nvim/README.md) for editor details.
 
 ## Windows setup
@@ -83,8 +95,10 @@ individual files, so it does not require elevation or Developer Mode.
 │   ├── .gitconfig
 │   ├── .config/{nvim,shell,tmux}/
 │   └── .pixi/manifests/pixi-global.toml
-├── packages/
-│   ├── system/debian.txt
-│   └── standalone.md
-└── machines/
+├── machines/
+│   ├── home-server/
+│   └── wsl-debian/
+└── packages/
+    ├── system/debian.txt
+    └── standalone.md
 ```

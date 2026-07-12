@@ -7,4 +7,8 @@
 [pull]
     ff = only
 [include]
+    path = ~/.config/dotfiles/machine/gitconfig
+[include]
     path = ~/.gitconfig.local
+[include]
+    path = ~/.config/dotfiles/local/gitconfig

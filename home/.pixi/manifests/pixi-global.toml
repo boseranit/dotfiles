@@ -14,8 +14,3 @@ exposed = { node = "node", npm = "npm", npx = "npx" }
 channels = ["conda-forge"]
 dependencies = { ruff = "*" }
 exposed = { ruff = "ruff" }
-
-[envs.zig]
-channels = ["conda-forge"]
-dependencies = { zig = "0.16.*" }
-exposed = { zig = "zig" }
