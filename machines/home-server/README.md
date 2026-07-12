@@ -9,7 +9,7 @@ Debian 13 (Trixie), x86-64. Select with:
 ## Differences from the shared base
 
 - The shell exposes the server's Hyperliquid data root.
-- Neovim uses OSC 52 over SSH and omits VimTeX and custom TeX snippets.
+- Neovim omits VimTeX and custom TeX snippets.
 - `latexmk` is not installed.
 
 ## Services

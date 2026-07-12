@@ -9,6 +9,12 @@ vim.g.loaded_perl_provider = 0
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 
+if vim.env.TMUX then
+  vim.g.clipboard = "tmux"
+elseif vim.env.SSH_TTY and not vim.env.DISPLAY and not vim.env.WAYLAND_DISPLAY then
+  vim.g.clipboard = "osc52"
+end
+
 for _, path in ipairs({
   vim.fn.expand("~/.config/dotfiles/machine/nvim.lua"),
   vim.fn.expand("~/.config/dotfiles/local/nvim.lua"),

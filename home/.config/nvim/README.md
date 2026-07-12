@@ -45,6 +45,10 @@ Useful mappings include:
 
 Custom C++ and LaTeX snippets live under `lua/snippets`.
 
+The clipboard provider is selected at runtime: tmux inside tmux, OSC 52 for a
+direct display-less SSH session, and the native provider otherwise. With
+`unnamedplus`, ordinary yanks copy through the selected provider.
+
 ## Machine-local settings
 
 Tracked machine differences belong in the selected profile's `nvim.lua`.
