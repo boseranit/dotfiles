@@ -2,8 +2,8 @@
 
 Each directory is a sparse set of tracked differences from the shared `home/`
 configuration. The Unix bootstrap selects one profile explicitly and remembers
-it at `~/.config/dotfiles/machine`. Windows uses the shared base directly until
-it has a tracked difference.
+it as a symlink at `~/.config/dotfiles/machine`. Windows uses the shared base
+directly until it has a tracked difference.
 
 Profile files are optional:
 

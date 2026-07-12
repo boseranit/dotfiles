@@ -56,23 +56,22 @@ link_path() {
     exit 1
   fi
 
-  local source_path target_path target_parent
+  local source_path target_path
   source_path="$(readlink -f -- "$source")"
-  target_parent="$(readlink -m -- "$(dirname -- "$target")")"
-  target_path="$target_parent/$(basename -- "$target")"
-  if [[ "$source_path" == "$target_path" || "$source_path" == "$target_path/"* ]]; then
-    printf 'Source %s is inside managed target %s; move the repository first.\n' \
-      "$source" "$target" >&2
-    exit 1
-  fi
-
-  if [[ -L "$target" ]] &&
-    [[ "$(readlink -f -- "$target")" == "$source_path" ]]; then
-    printf 'Already linked %s\n' "$target"
-    return
-  fi
-
   if [[ -e "$target" || -L "$target" ]]; then
+    target_path="$(cd -- "$(dirname -- "$target")" && pwd -P)/$(basename -- "$target")"
+    if [[ "$source_path" == "$target_path" || "$source_path" == "$target_path/"* ]]; then
+      printf 'Source %s is inside managed target %s; move the repository first.\n' \
+        "$source" "$target" >&2
+      exit 1
+    fi
+
+    if [[ -L "$target" ]] &&
+      [[ "$(readlink -f -- "$target")" == "$source_path" ]]; then
+      printf 'Already linked %s\n' "$target"
+      return
+    fi
+
     backup_target "$target"
   fi
 
@@ -86,9 +85,8 @@ link_path() {
 }
 
 machine_link="$HOME/.config/dotfiles/machine"
-if [[ -z "$machine" && ( -e "$machine_link" || -L "$machine_link" ) ]]; then
-  selected_path="$(readlink -f -- "$machine_link" 2>/dev/null || true)"
-  [[ -n "$selected_path" ]] && machine="$(basename -- "$selected_path")"
+if [[ -z "$machine" && -L "$machine_link" ]]; then
+  machine="$(basename -- "$(readlink -- "$machine_link")")"
 fi
 
 if [[ ! "$machine" =~ ^[A-Za-z0-9][A-Za-z0-9._-]*$ ]]; then
@@ -112,15 +110,8 @@ else
   chmod 700 -- "$local_config"
 fi
 
-managed_paths=(
-  ".bashrc"
-  ".gitconfig"
-  ".config/shell"
-  ".config/tmux"
-  ".pixi/manifests/pixi-global.toml"
-)
-
-for path in "${managed_paths[@]}"; do
+for path in .bashrc .gitconfig .config/shell .config/tmux \
+  .pixi/manifests/pixi-global.toml; do
   link_path "$repo/home/$path" "$HOME/$path"
 done
 

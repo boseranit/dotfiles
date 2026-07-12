@@ -18,8 +18,9 @@ does not try to turn every application into a bespoke installer.
 
 `home/` mirrors shared paths below `$HOME`. Bootstrap links those paths plus
 one explicitly selected sparse machine profile, backing up conflicts first.
-The selection is remembered at `~/.config/dotfiles/machine`. Bootstrap
-deliberately does not install packages or services.
+The selection is remembered as a symlink at
+`~/.config/dotfiles/machine`. Bootstrap deliberately does not install packages
+or services.
 
 ## Debian / WSL Debian setup
 
