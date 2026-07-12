@@ -37,11 +37,15 @@ local function math_auto(trig, name, body, opts)
   })
 end
 
+local function show_at_line_begin(line_to_cursor)
+  return line_to_cursor:match("^%s*%S*$") ~= nil
+end
+
 local function at_line_begin(trig, name, body, autosnippet)
   local constructor = autosnippet and auto or manual
   return constructor(trig, name, body, nil, {
     condition = conditions.line_begin,
-    show_condition = conditions.line_begin,
+    show_condition = show_at_line_begin,
   })
 end
 

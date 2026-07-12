@@ -53,8 +53,33 @@ return {
         ["<C-Up>"] = { "scroll_documentation_up", "fallback" },
         ["<C-Down>"] = { "scroll_documentation_down", "fallback" },
         ["<CR>"] = { "accept", "fallback" },
-        ["<Tab>"] = { "snippet_forward", "select_next", "fallback" },
-        ["<S-Tab>"] = { "snippet_backward", "select_prev", "fallback" },
+        ["<Tab>"] = {
+          function()
+            local luasnip = require("luasnip")
+            if luasnip.expandable() then
+              vim.schedule(luasnip.expand)
+              return true
+            end
+          end,
+          "snippet_forward",
+          "select_next",
+          "fallback",
+        },
+        ["<S-Tab>"] = {
+          function()
+            local luasnip = require("luasnip")
+            if luasnip.locally_jumpable(-1) then
+              vim.schedule(function()
+                if luasnip.locally_jumpable(-1) then
+                  luasnip.jump(-1)
+                end
+              end)
+              return true
+            end
+          end,
+          "select_prev",
+          "fallback",
+        },
       },
       snippets = { preset = "luasnip" },
       sources = {
