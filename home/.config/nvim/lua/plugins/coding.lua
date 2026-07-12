@@ -38,7 +38,11 @@ return {
     "saghen/blink.cmp",
     version = "1.*",
     dependencies = {
-      "L3MON4D3/LuaSnip",
+      {
+        "L3MON4D3/LuaSnip",
+        build = vim.fn.has("win32") == 1 and "gmake CC=gcc install_jsregexp"
+          or "make install_jsregexp",
+      },
       "rafamadriz/friendly-snippets",
     },
     opts = {
