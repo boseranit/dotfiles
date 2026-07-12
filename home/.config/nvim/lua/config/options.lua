@@ -5,6 +5,7 @@ local opt = vim.opt
 
 opt.autoindent = true
 opt.background = "dark"
+opt.clipboard = "unnamedplus"
 opt.conceallevel = 1
 opt.mouse = "a"
 opt.number = true

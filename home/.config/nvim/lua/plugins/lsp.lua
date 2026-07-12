@@ -17,7 +17,7 @@ return {
       })
 
       return {
-        ensure_installed = { "clangd", "lua_ls", "pyright", "ts_ls" },
+        ensure_installed = { "clangd", "lua_ls", "pyright" },
       }
     end,
     config = function(_, opts)

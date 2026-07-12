@@ -6,30 +6,32 @@ return {
     build = ":TSUpdate",
     dependencies = { "neovim-treesitter/treesitter-parser-registry" },
     config = function()
+      -- tree-sitter-cli otherwise selects cl.exe for native Windows builds.
+      -- Use Clang with the MinGW libraries supplied by Strawberry Perl when
+      -- the user has not selected a compiler explicitly.
       if vim.fn.has("win32") == 1 and (vim.env.CC == nil or vim.env.CC == "") then
         local clang = vim.fn.exepath("clang")
-        if clang ~= "" then
+        local strawberry = "C:/Strawberry/c"
+        if clang ~= "" and vim.fn.isdirectory(strawberry) == 1 then
           vim.env.CC = clang
           vim.env.CXX = vim.fn.exepath("clang++")
-
-          local strawberry = "C:/Strawberry/c"
-          if vim.fn.isdirectory(strawberry) == 1 then
-            local mingw_flags = "--target=x86_64-w64-windows-gnu --gcc-toolchain=" .. strawberry
-            vim.env.CFLAGS = mingw_flags
-            vim.env.CXXFLAGS = mingw_flags
-          end
+          local mingw_flags = "--target=x86_64-w64-windows-gnu --gcc-toolchain=" .. strawberry
+          vim.env.CFLAGS = mingw_flags
+          vim.env.CXXFLAGS = mingw_flags
         end
       end
 
       require("nvim-treesitter").install({
         "c",
         "cpp",
+        "ecma",
         "javascript",
+        "jsx",
         "lua",
         "python",
         "vim",
         "vimdoc",
-      })
+      }):wait(300000)
     end,
   },
   {
