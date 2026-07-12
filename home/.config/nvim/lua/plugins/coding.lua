@@ -53,28 +53,8 @@ return {
         ["<C-Up>"] = { "scroll_documentation_up", "fallback" },
         ["<C-Down>"] = { "scroll_documentation_down", "fallback" },
         ["<CR>"] = { "accept", "fallback" },
-        ["<Tab>"] = {
-          function()
-            local luasnip = require("luasnip")
-            if luasnip.expand_or_locally_jumpable() then
-              luasnip.expand_or_jump()
-              return true
-            end
-          end,
-          "select_next",
-          "fallback",
-        },
-        ["<S-Tab>"] = {
-          function()
-            local luasnip = require("luasnip")
-            if luasnip.locally_jumpable(-1) then
-              luasnip.jump(-1)
-              return true
-            end
-          end,
-          "select_prev",
-          "fallback",
-        },
+        ["<Tab>"] = { "snippet_forward", "select_next", "fallback" },
+        ["<S-Tab>"] = { "snippet_backward", "select_prev", "fallback" },
       },
       snippets = { preset = "luasnip" },
       sources = {
@@ -90,8 +70,7 @@ return {
       completion = { documentation = { auto_show = true } },
     },
     config = function(_, opts)
-      local luasnip = require("luasnip")
-      luasnip.config.setup({
+      require("luasnip").setup({
         enable_autosnippets = true,
         cut_selection_keys = "<Tab>",
       })
