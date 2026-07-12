@@ -3,8 +3,6 @@ build-essential
 ca-certificates
 curl
 git
-latexmk
 python3
 tmux
 unzip
-xclip

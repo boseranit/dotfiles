@@ -9,6 +9,15 @@ vim.g.loaded_perl_provider = 0
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 
+for _, path in ipairs({
+  vim.fn.expand("~/.config/dotfiles/machine/nvim.lua"),
+  vim.fn.expand("~/.config/dotfiles/local/nvim.lua"),
+}) do
+  if vim.uv.fs_stat(path) then
+    dofile(path)
+  end
+end
+
 require("config.options")
 require("config.keymaps")
 require("config.autocmds")

@@ -6,5 +6,16 @@
     prune = true
 [pull]
     ff = only
+[alias]
+    gs = status
+    gcm = commit -m
+    ga = add -u
+    gds = diff --numstat
+    gd = diff
+    gmain = !git switch main && git pull
+[include]
+    path = ~/.config/dotfiles/machine/gitconfig
 [include]
     path = ~/.gitconfig.local
+[include]
+    path = ~/.config/dotfiles/local/gitconfig
