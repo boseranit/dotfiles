@@ -1,0 +1,10 @@
+[core]
+    editor = nvim
+[init]
+    defaultBranch = main
+[fetch]
+    prune = true
+[pull]
+    ff = only
+[include]
+    path = ~/.gitconfig.local

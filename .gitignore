@@ -6,3 +6,8 @@ plugged/
 # Machine-local configuration and secrets
 *.local
 environment.local
+home/.config/shell/local.sh
+
+# Local compiler output
+*.lib
+*.pdb
