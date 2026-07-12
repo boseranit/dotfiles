@@ -1,0 +1,13 @@
+plugged/
+.lazy-test/
+*.backup.*
+.DS_Store
+
+# Machine-local configuration and secrets
+*.local
+environment.local
+home/.config/shell/local.sh
+
+# Local compiler output
+*.lib
+*.pdb

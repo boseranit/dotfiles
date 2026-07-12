@@ -1,0 +1,10 @@
+# Shared Debian foundation. Keep one apt package per line.
+build-essential
+ca-certificates
+curl
+git
+latexmk
+python3
+tmux
+unzip
+xclip
