@@ -39,7 +39,10 @@ Useful mappings include:
 
 - `<C-n>`: open Oil in a floating window
 - `-`: open the parent directory in Oil
-- `<leader>ff`, `<leader>fg`, `<leader>fb`: Telescope files, grep, buffers
+- `<leader>ff`, `<leader>fg`, `<leader>fb`: Telescope files (including hidden files), grep, buffers
+- `[h` / `]h`: previous/next Git hunk
+- `<leader>gs`, `<leader>gr`, `<leader>gp`: stage, reset, or preview the current Git hunk
+- `<leader>gb`, `<leader>gd`: blame the current line or diff against the index
 - `<leader>gg`: LazyGit
 - `<Tab>` / `<S-Tab>`: expand or move through snippets
 

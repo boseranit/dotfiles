@@ -24,12 +24,31 @@ return {
       { "<leader>fb", "<cmd>Telescope buffers<CR>", desc = "Buffers" },
       { "<leader>fh", "<cmd>Telescope help_tags<CR>", desc = "Help tags" },
     },
-    opts = {},
+    opts = {
+      pickers = {
+        find_files = { hidden = true },
+      },
+    },
   },
   {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPre", "BufNewFile" },
-    opts = {},
+    opts = {
+      on_attach = function(buffer)
+        local gitsigns = require("gitsigns")
+        local function map(lhs, rhs, desc)
+          vim.keymap.set("n", lhs, rhs, { buffer = buffer, desc = desc })
+        end
+
+        map("]h", function() gitsigns.nav_hunk("next") end, "Next Git hunk")
+        map("[h", function() gitsigns.nav_hunk("prev") end, "Previous Git hunk")
+        map("<leader>gs", gitsigns.stage_hunk, "Stage Git hunk")
+        map("<leader>gr", gitsigns.reset_hunk, "Reset Git hunk")
+        map("<leader>gp", gitsigns.preview_hunk, "Preview Git hunk")
+        map("<leader>gb", gitsigns.blame_line, "Blame line")
+        map("<leader>gd", gitsigns.diffthis, "Diff against index")
+      end,
+    },
   },
   {
     "kdheepak/lazygit.nvim",
