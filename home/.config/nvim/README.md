@@ -10,7 +10,7 @@ lazy.nvim on first launch.
 - A C/C++ toolchain and Tree-sitter CLI for parser builds
 - ripgrep and fd for Telescope
 - lazygit for the Git UI
-- Node.js/npm for Mason's Pyright package
+- Node.js/npm for Mason's basedpyright package
 - `latexmk` and a PDF viewer only when using VimTeX
 
 On Debian, the compiler and Git come from `packages/system/debian.txt`; the
@@ -35,22 +35,7 @@ nvim --headless '+checkhealth' '+w! /tmp/nvim-health.txt' +qa
 
 The second command is for Linux. On Windows, run `:checkhealth` interactively.
 
-Useful mappings include:
-
-- `<C-n>`: open Oil in a floating window
-- `-`: open the parent directory in Oil
-- `<leader>ff`, `<leader>fg`, `<leader>fb`: Telescope files (including hidden files), grep, buffers
-- `[h` / `]h`: previous/next Git hunk
-- `<leader>gs`, `<leader>gr`, `<leader>gp`: stage, reset, or preview the current Git hunk
-- `<leader>gb`, `<leader>gd`: blame the current line or diff against the index
-- `<leader>gg`: LazyGit
-- `<Tab>` / `<S-Tab>`: expand or move through snippets
-
-Custom C++ and LaTeX snippets live under `lua/snippets`.
-
-The clipboard provider is selected at runtime: tmux inside tmux, OSC 52 for a
-direct display-less SSH session, and the native provider otherwise. With
-`unnamedplus`, ordinary yanks copy through the selected provider.
+See [CHEATSHEET.md](CHEATSHEET.md) for mappings and everyday editor behavior.
 
 ## Machine-local settings
 
