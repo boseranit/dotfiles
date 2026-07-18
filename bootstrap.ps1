@@ -77,6 +77,10 @@ $paths = @(
         Target = Join-Path $HOME '.gitconfig'
     },
     @{
+        Source = Join-Path $homeSource '.config\tmux'
+        Target = Join-Path $HOME '.config\tmux'
+    },
+    @{
         Source = Join-Path $homeSource '.pixi\manifests\pixi-global.toml'
         Target = Join-Path $HOME '.pixi\manifests\pixi-global.toml'
     },
@@ -88,6 +92,17 @@ $paths = @(
 
 foreach ($path in $paths) {
     Install-ManagedPath -Source $path.Source -Target $path.Target
+}
+
+$psmuxConfigPath = [IO.Path]::GetFullPath((Join-Path $HOME '.config\tmux\tmux.conf'))
+$currentPsmuxConfigPath = [Environment]::GetEnvironmentVariable('PSMUX_CONFIG_FILE', 'User')
+if ([string]::Equals($currentPsmuxConfigPath, $psmuxConfigPath, [StringComparison]::OrdinalIgnoreCase)) {
+    Write-Host "PSMUX_CONFIG_FILE already points to $psmuxConfigPath"
+} elseif ($DryRun) {
+    Write-Host "Would set user PSMUX_CONFIG_FILE to $psmuxConfigPath"
+} else {
+    [Environment]::SetEnvironmentVariable('PSMUX_CONFIG_FILE', $psmuxConfigPath, 'User')
+    Write-Host "Set user PSMUX_CONFIG_FILE to $psmuxConfigPath"
 }
 
 Write-Host "`nConfiguration deployed; package installation remains explicit."
