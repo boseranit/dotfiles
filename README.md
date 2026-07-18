@@ -83,10 +83,12 @@ nvim --headless "+Lazy! sync" +qa
 
 The PowerShell bootstrap maps Neovim to `%LOCALAPPDATA%\nvim`, Windows Terminal
 settings to its packaged-app `LocalState` directory, and deploys the portable
-home files that are meaningful on Windows. tmux uses
-`~/.config/tmux/tmux.conf`; psmux's XDG config sources that same file. Existing
-targets receive a timestamped backup. It uses directory junctions and hard
-links, so it does not require elevation or Developer Mode.
+home files that are meaningful on Windows. tmux and psmux both use
+`~/.config/tmux/tmux.conf`; the bootstrap points psmux there through the user
+`PSMUX_CONFIG_FILE` environment variable. Existing targets receive a
+timestamped backup. It uses directory junctions and hard links, so it does not
+require elevation or Developer Mode. Open a new terminal after bootstrapping so
+the psmux aliases and environment variable are available.
 
 ## Repository layout
 
