@@ -5,6 +5,7 @@
 | Pixi | Prefix.dev | `curl -fsSL https://pixi.sh/install.sh \| sh` |
 | Codex | OpenAI | `curl -fsSL https://chatgpt.com/codex/install.sh \| sh` |
 | RTK | Upstream `install.sh` | Installer URL not yet recorded |
+| psmux (Windows) | WinGet | `winget install --id marlocarlo.psmux --exact` |
 
 ## Neovim 0.12.4
 

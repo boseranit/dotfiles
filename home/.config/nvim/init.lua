@@ -10,6 +10,8 @@ vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 
 if vim.env.TMUX then
+  -- psmux sets TMUX but not TERM_PROGRAM, so smart-splits cannot autodetect it.
+  vim.g.smart_splits_multiplexer_integration = "tmux"
   vim.g.clipboard = "tmux"
 elseif vim.env.SSH_TTY and not vim.env.DISPLAY and not vim.env.WAYLAND_DISPLAY then
   vim.g.clipboard = "osc52"

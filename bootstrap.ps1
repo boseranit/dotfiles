@@ -77,6 +77,14 @@ $paths = @(
         Target = Join-Path $HOME '.gitconfig'
     },
     @{
+        Source = Join-Path $homeSource '.config\tmux'
+        Target = Join-Path $HOME '.config\tmux'
+    },
+    @{
+        Source = Join-Path $homeSource '.config\psmux'
+        Target = Join-Path $HOME '.config\psmux'
+    },
+    @{
         Source = Join-Path $homeSource '.pixi\manifests\pixi-global.toml'
         Target = Join-Path $HOME '.pixi\manifests\pixi-global.toml'
     },
