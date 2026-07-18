@@ -22,14 +22,11 @@ return {
       end
 
       require("nvim-treesitter").install({
-        "c",
-        "cpp",
-        "ecma",
-        "javascript",
-        "jsx",
+        "latex",
         "lua",
+        "markdown",
+        "markdown_inline",
         "python",
-        "vim",
         "vimdoc",
       }):wait(300000)
     end,

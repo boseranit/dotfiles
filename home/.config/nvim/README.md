@@ -10,6 +10,7 @@ lazy.nvim on first launch.
 - A C/C++ toolchain and Tree-sitter CLI for parser builds
 - ripgrep and fd for Telescope
 - lazygit for the Git UI
+- `latex2text` for render-markdown formulas
 - Node.js/npm for Mason's basedpyright package
 - `latexmk` and a PDF viewer only when using VimTeX
 
