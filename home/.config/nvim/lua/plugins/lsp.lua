@@ -15,9 +15,25 @@ return {
       vim.lsp.config("*", {
         capabilities = require("blink.cmp").get_lsp_capabilities(),
       })
+      vim.lsp.config("basedpyright", {
+        settings = {
+          basedpyright = {
+            disableOrganizeImports = true,
+            analysis = {
+              typeCheckingMode = "basic",
+            },
+          },
+        },
+      })
+      vim.lsp.config("ruff", {
+        on_attach = function(client)
+          client.server_capabilities.hoverProvider = false
+        end,
+      })
 
       return {
-        ensure_installed = { "clangd", "lua_ls", "pyright" },
+        automatic_enable = { "basedpyright", "clangd", "lua_ls", "ruff" },
+        ensure_installed = { "basedpyright", "clangd", "lua_ls", "ruff" },
       }
     end,
     config = function(_, opts)
