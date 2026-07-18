@@ -4,5 +4,5 @@ ca-certificates
 curl
 git
 python3
-tmux
+tmux/trixie-backports
 unzip
