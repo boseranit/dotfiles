@@ -11,7 +11,7 @@ lazy.nvim on first launch.
 - ripgrep and fd for Telescope
 - lazygit for the Git UI
 - `latex2text` for render-markdown formulas
-- Node.js/npm for Mason's basedpyright package
+- Python venv support for Mason's basedpyright and ruff packages
 - `latexmk` and a PDF viewer only when using VimTeX
 
 On Debian, the compiler and Git come from `packages/system/debian.txt`; the
