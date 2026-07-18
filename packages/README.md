@@ -31,5 +31,5 @@ Pixi, and a standalone installer.
 APT owns the host `python3` interpreter for operating-system scripts and basic
 tool compatibility. Do not install project packages into it with `pip`.
 Project Python versions, libraries, and development tools belong in each
-project's Pixi manifest and lock file. `python3-venv` is optional and is not
-part of the shared baseline while projects use Pixi.
+project's Pixi manifest and lock file. Neovim's Mason packages use
+`python3-venv` for isolated Python tools.
