@@ -13,6 +13,7 @@ does not try to turn every application into a bespoke installer.
 | Essential OS packages | `packages/system/<distribution>.txt` |
 | Upstream standalone installers | `packages/standalone.md` |
 | Sparse per-machine differences | `machines/<machine>/` |
+| Windows Terminal configuration | `windows/terminal/settings.json` |
 | Services such as Immich and Seafile | A separate `homelab` repository |
 | Secrets, data, caches, and installed binaries | Outside Git |
 
@@ -79,8 +80,9 @@ pixi global sync
 nvim --headless "+Lazy! sync" +qa
 ```
 
-The PowerShell bootstrap maps Neovim to `%LOCALAPPDATA%\nvim` and deploys the
-portable home files that are meaningful on Windows. Existing targets receive a
+The PowerShell bootstrap maps Neovim to `%LOCALAPPDATA%\nvim`, Windows Terminal
+settings to its packaged-app `LocalState` directory, and deploys the portable
+home files that are meaningful on Windows. Existing targets receive a
 timestamped backup. It uses a directory junction for Neovim and hard links for
 individual files, so it does not require elevation or Developer Mode.
 
@@ -98,6 +100,7 @@ individual files, so it does not require elevation or Developer Mode.
 ├── machines/
 │   ├── home-server/
 │   └── wsl-debian/
+├── windows/terminal/settings.json
 └── packages/
     ├── system/debian.txt
     └── standalone.md

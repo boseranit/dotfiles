@@ -79,6 +79,10 @@ $paths = @(
     @{
         Source = Join-Path $homeSource '.pixi\manifests\pixi-global.toml'
         Target = Join-Path $HOME '.pixi\manifests\pixi-global.toml'
+    },
+    @{
+        Source = Join-Path $PSScriptRoot 'windows\terminal\settings.json'
+        Target = Join-Path $env:LOCALAPPDATA 'Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json'
     }
 )
 
