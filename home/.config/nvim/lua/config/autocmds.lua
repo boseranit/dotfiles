@@ -8,7 +8,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 vim.api.nvim_create_autocmd("FileType", {
   group = group,
-  pattern = { "c", "cpp", "javascript", "lua", "python", "vim", "vimdoc" },
+  pattern = { "lua", "markdown", "python", "vimdoc" },
   callback = function(args)
     pcall(vim.treesitter.start, args.buf)
   end,
