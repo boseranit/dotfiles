@@ -1,11 +1,11 @@
 return {
   {
-    "iagorrr/noctishc.nvim",
-    name = "noctishc.nvim",
+    "D0nw0r/dark2026.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme("noctishc")
+      vim.cmd.colorscheme "dark2026"
+      vim.cmd.highlight "Normal guibg=#101010"
     end,
   },
   {

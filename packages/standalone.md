@@ -6,6 +6,10 @@
 | Codex | OpenAI | `curl -fsSL https://chatgpt.com/codex/install.sh \| sh` |
 | RTK | Upstream `install.sh` | Installer URL not yet recorded |
 | psmux (Windows) | WinGet | `winget install --id marlocarlo.psmux --exact` |
+| Tmux Plugin Manager | GitHub | `git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm` |
+
+After installing TPM, reload tmux and press `prefix + I` to install the plugins
+declared in `tmux.conf`. Use `prefix + U` to update them.
 
 ## Neovim 0.12.4
 
