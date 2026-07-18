@@ -11,6 +11,14 @@ return {
     dependencies = { { "nvim-mini/mini.icons", opts = {} } },
     opts = {
       default_file_explorer = true,
+      keymaps = {
+        ["<C-s>"] = false,
+        ["<C-h>"] = false,
+        ["<C-l>"] = false,
+        ["<leader>|"] = { "actions.select", opts = { vertical = true } },
+        ["<leader>-"] = { "actions.select", opts = { horizontal = true } },
+        ["gr"] = "actions.refresh",
+      },
       view_options = { show_hidden = true },
     },
     keys = {
