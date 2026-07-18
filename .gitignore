@@ -1,4 +1,4 @@
-plugged/
+home/.config/tmux/plugins/
 .lazy-test/
 *.backup.*
 .DS_Store
