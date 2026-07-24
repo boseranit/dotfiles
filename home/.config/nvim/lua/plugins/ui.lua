@@ -45,4 +45,31 @@ return {
     },
     opts = {},
   },
+  {
+    "brianhuster/live-preview.nvim",
+    cmd = "LivePreview",
+    ft = "markdown",
+    config = function()
+      require("livepreview.config").set({
+        address = "192.168.1.104",
+        port = 5050,
+        browser = "true",
+        dynamic_root = true,
+      })
+    end,
+    keys = {
+      {
+        "<leader>lp",
+        "<cmd>LivePreview start<CR>",
+        ft = "markdown",
+        desc = "Start live Markdown preview",
+      },
+      {
+        "<leader>lq",
+        "<cmd>LivePreview close<CR>",
+        ft = "markdown",
+        desc = "Close live Markdown preview",
+      },
+    },
+  },
 }

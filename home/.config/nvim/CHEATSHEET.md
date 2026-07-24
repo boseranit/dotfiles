@@ -133,6 +133,13 @@ or tab; `<Tab>` marks results and `<C-q>` sends them to quickfix.
 Custom [C++ snippets](lua/snippets/cpp.lua) and
 [LaTeX snippets](lua/snippets/tex.lua) load automatically.
 
+## Markdown
+
+| Key | Mode | Action |
+| --- | --- | --- |
+| `<leader>lp` | N | Start the live browser preview at `192.168.1.104:5050` |
+| `<leader>lq` | N | Close the live browser preview |
+
 ## VimTeX
 
 Available when LaTeX support is enabled.
