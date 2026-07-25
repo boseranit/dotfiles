@@ -1,3 +1,33 @@
+local function preview_markdown()
+  local filepath = vim.api.nvim_buf_get_name(0)
+  local utils = require("livepreview.utils")
+  if utils.supported_filetype(filepath) ~= "markdown" then
+    vim.notify("Live preview: current buffer is not a Markdown file", vim.log.levels.WARN)
+    return
+  end
+
+  filepath = vim.fs.normalize(filepath)
+  local livepreview = require("livepreview")
+  local config = require("livepreview.config").config
+  local running = livepreview.is_running()
+  local root = running and livepreview.serverObj.webroot or vim.uv.cwd()
+  root = root and vim.fs.normalize(root)
+
+  local urlpath = root and utils.get_relative_path(filepath, root)
+  if not urlpath then
+    vim.notify("Live preview: file is outside the server root", vim.log.levels.WARN)
+    return
+  end
+
+  if not running and not livepreview.start(filepath, config.port) then
+    return
+  end
+
+  local url = ("http://%s:%d/%s"):format(config.address, config.port, vim.uri_encode(urlpath))
+  print("live-preview.nvim: Opening browser at " .. url)
+  utils.open_browser(url, config.browser)
+end
+
 return {
   {
     "D0nw0r/dark2026.nvim",
@@ -54,15 +84,15 @@ return {
         address = "192.168.1.104",
         port = 5050,
         browser = "true",
-        dynamic_root = true,
+        dynamic_root = false,
       })
     end,
     keys = {
       {
         "<leader>lp",
-        "<cmd>LivePreview start<CR>",
+        preview_markdown,
         ft = "markdown",
-        desc = "Start live Markdown preview",
+        desc = "Open live Markdown preview",
       },
       {
         "<leader>lq",

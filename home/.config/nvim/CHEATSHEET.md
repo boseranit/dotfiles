@@ -137,7 +137,7 @@ Custom [C++ snippets](lua/snippets/cpp.lua) and
 
 | Key | Mode | Action |
 | --- | --- | --- |
-| `<leader>lp` | N | Start the live browser preview at `192.168.1.104:5050` |
+| `<leader>lp` | N | Open the current file at its live preview URL on `192.168.1.104:5050` |
 | `<leader>lq` | N | Close the live browser preview |
 
 ## VimTeX
