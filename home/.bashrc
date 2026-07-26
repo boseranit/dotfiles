@@ -1,4 +1,8 @@
 # Managed by the dotfiles repository.
+# Machine environment is also needed by non-interactive login shells.
+[[ -r "$HOME/.config/dotfiles/machine/shell.sh" ]] &&
+  source "$HOME/.config/dotfiles/machine/shell.sh"
+
 case $- in
   *i*) ;;
   *) return ;;
@@ -15,8 +19,6 @@ export PATH
 
 [[ -r "$HOME/.config/shell/aliases.sh" ]] &&
   source "$HOME/.config/shell/aliases.sh"
-[[ -r "$HOME/.config/dotfiles/machine/shell.sh" ]] &&
-  source "$HOME/.config/dotfiles/machine/shell.sh"
 [[ -r "$HOME/.config/dotfiles/local/shell.sh" ]] &&
   source "$HOME/.config/dotfiles/local/shell.sh"
 
