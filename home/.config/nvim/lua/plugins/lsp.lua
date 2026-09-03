@@ -30,10 +30,13 @@ return {
           client.server_capabilities.hoverProvider = false
         end,
       })
+      vim.lsp.enable({ "basedpyright", "ruff" })
 
       return {
-        automatic_enable = { "basedpyright", "clangd", "lua_ls", "ruff" },
-        ensure_installed = { "basedpyright", "clangd", "lua_ls", "ruff" },
+        automatic_enable = { "clangd", "lua_ls" },
+        -- Python tools are owned by the Pixi global manifest. Mason only owns
+        -- servers that are not already supplied by the portable CLI layer.
+        ensure_installed = { "clangd", "lua_ls" },
       }
     end,
     config = function(_, opts)

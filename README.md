@@ -14,6 +14,7 @@ does not try to turn every application into a bespoke installer.
 | Upstream standalone installers | `packages/standalone.md` |
 | Sparse per-machine differences | `machines/<machine>/` |
 | Windows Terminal configuration | `windows/terminal/settings.json` |
+| Personal hardware configuration and runbooks | `hardware/` |
 | Services such as Immich and Seafile | A separate `homelab` repository |
 | Secrets, data, caches, and installed binaries | Outside Git |
 
@@ -101,6 +102,8 @@ the psmux aliases and environment variable are available.
 │   ├── .gitconfig
 │   ├── .config/{nvim,shell,tmux}/
 │   └── .pixi/manifests/pixi-global.toml
+├── hardware/
+│   └── keyboards/iris-rev7/
 ├── machines/
 │   ├── home-server/
 │   └── wsl-debian/

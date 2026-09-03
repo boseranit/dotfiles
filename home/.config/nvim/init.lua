@@ -12,7 +12,11 @@ vim.g.loaded_ruby_provider = 0
 if vim.env.TMUX then
   -- psmux sets TMUX but not TERM_PROGRAM, so smart-splits cannot autodetect it.
   vim.g.smart_splits_multiplexer_integration = "tmux"
-  vim.g.clipboard = "tmux"
+  -- Native Windows can use Neovim's bundled win32yank directly. The tmux
+  -- clipboard provider invokes `sh` when pasting, which psmux does not supply.
+  if vim.fn.has("win32") == 0 then
+    vim.g.clipboard = "tmux"
+  end
 elseif vim.env.SSH_TTY and not vim.env.DISPLAY and not vim.env.WAYLAND_DISPLAY then
   vim.g.clipboard = "osc52"
 end

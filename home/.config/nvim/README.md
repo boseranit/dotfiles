@@ -11,11 +11,12 @@ lazy.nvim on first launch.
 - ripgrep and fd for Telescope
 - lazygit for the Git UI
 - `latex2text` for render-markdown formulas
-- Python venv support for Mason's basedpyright and ruff packages
+- Node.js/npm, BasedPyright, and Ruff for language tooling
 - `latexmk` and a PDF viewer only when using VimTeX
 
 On Debian, the compiler and Git come from `packages/system/debian.txt`; the
-portable CLI tools and Node.js come from the Pixi global manifest.
+portable CLI tools, Node.js, BasedPyright, and Ruff come from the Pixi global
+manifest. Mason manages Clangd and Lua Language Server.
 
 On WSL, VimTeX opens PDFs with the Windows SumatraPDF installation. The
 tracked adapter under `scripts/` converts command and SyncTeX paths to Windows
