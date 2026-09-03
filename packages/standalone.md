@@ -4,6 +4,8 @@
 | --- | --- | --- |
 | Pixi | Prefix.dev | `curl -fsSL https://pixi.sh/install.sh \| sh` |
 | Codex | OpenAI | `curl -fsSL https://chatgpt.com/codex/install.sh \| sh` |
+| Oh My Pi | [omp.sh](https://omp.sh) | `curl -fsSL https://omp.sh/install \| sh` |
+| Oh My Pi (Windows) | [omp.sh](https://omp.sh) | `irm https://omp.sh/install.ps1 \| iex` |
 | RTK | Upstream `install.sh` | Installer URL not yet recorded |
 | QMK (WSL) | QMK | `curl -fsSL https://install.qmk.fm \| sh` |
 | psmux (Windows) | WinGet | `winget install --id marlocarlo.psmux --exact` |
