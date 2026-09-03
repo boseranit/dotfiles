@@ -5,8 +5,9 @@
 | Pixi | Prefix.dev | `curl -fsSL https://pixi.sh/install.sh \| sh` |
 | Codex | OpenAI | `curl -fsSL https://chatgpt.com/codex/install.sh \| sh` |
 | RTK | Upstream `install.sh` | Installer URL not yet recorded |
+| QMK (WSL) | QMK | `curl -fsSL https://install.qmk.fm \| sh` |
 | psmux (Windows) | WinGet | `winget install --id marlocarlo.psmux --exact` |
-| Tmux Plugin Manager | GitHub | `git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm` |
+| Tmux Plugin Manager | GitHub | `git clone https://github.com/tmux-plugins/tpm ~/.local/share/tmux/plugins/tpm` |
 
 After installing TPM, reload tmux and press `prefix + I` to install the plugins
 declared in `tmux.conf`. Use `prefix + U` to update them.

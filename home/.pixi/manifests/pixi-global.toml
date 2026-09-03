@@ -14,3 +14,8 @@ exposed = { node = "node", npm = "npm", npx = "npx" }
 channels = ["conda-forge"]
 dependencies = { ruff = "*" }
 exposed = { ruff = "ruff" }
+
+[envs.basedpyright]
+channels = ["conda-forge"]
+dependencies = { basedpyright = "*" }
+exposed = { basedpyright = "basedpyright", basedpyright-langserver = "basedpyright-langserver" }
