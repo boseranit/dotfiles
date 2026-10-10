@@ -14,6 +14,32 @@
 After installing TPM, reload tmux and press `prefix + I` to install the plugins
 declared in `tmux.conf`. Use `prefix + U` to update them.
 
+## Oh My Pi executable Scout
+
+The canonical definition is `home/.omp/agent/agents/scout-exec.md`. Both
+bootstraps install it at `~/.omp/agent/agents/scout-exec.md`: a symlink on Linux
+and a hard link on Windows. Only this agent file is managed; OMP user settings
+and other user agents remain untouched. Windows hard links require the
+repository and home directory to be on the same volume.
+
+It retains bundled Scout's structured output and `model: "@smol"` selection,
+with `bash` and `eval` added for read-only inspection and analysis. Regular
+`scout` remains unchanged. The definition uses OMP's `thinkingLevel` and
+`readSummarize` frontmatter keys.
+
+Start a fresh OMP session and select `agent: "scout-exec"` in a task call, or
+ask OMP to use `scout-exec` for an investigation requiring shell/Python analysis.
+Python runs through `eval` with `language: "py"`; check interpreter availability
+with `omp setup python --check --json`. For inline Python through Bash, use an
+installed Python 3 executable with `-B`: `python3` on Linux, or `python` when
+available on Windows. Debian's `python3` package does not provide a `python`
+alias by default.
+
+The agent forbids file changes, state-changing commands, on-disk scripts,
+temporary files, and dependency installation. Python analysis stays in memory
+with bytecode creation disabled. It has no `edit` or `write` tool, but Bash/eval
+are not sandboxed: the no-write rule is instruction-based, not filesystem-enforced.
+
 ## Neovim 0.12.4
 
 - Source: [GitHub release](https://github.com/neovim/neovim/releases/tag/v0.12.4)
