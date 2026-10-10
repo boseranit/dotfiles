@@ -8,7 +8,7 @@ does not try to turn every application into a bespoke installer.
 
 | Concern | Source of truth |
 | --- | --- |
-| Shell, Neovim, tmux, and Git configuration | `home/` |
+| Shell, Neovim, tmux, Git, and OMP agent configuration | `home/` |
 | Portable CLI tools such as jq and ripgrep | `home/.pixi/manifests/pixi-global.toml` |
 | Essential OS packages | `packages/system/<distribution>.txt` |
 | Upstream standalone installers | `packages/standalone.md` |
@@ -23,6 +23,10 @@ one explicitly selected sparse machine profile, backing up conflicts first.
 The selection is remembered as a symlink at
 `~/.config/dotfiles/machine`. Bootstrap deliberately does not install packages
 or services.
+
+Both bootstraps install the tracked OMP `scout-exec` agent at
+`~/.omp/agent/agents/scout-exec.md`. They manage only that file, leaving OMP
+settings and other agents untouched; see [usage and permissions](packages/standalone.md#oh-my-pi-executable-scout).
 
 ## Debian / WSL Debian setup
 
@@ -101,6 +105,7 @@ the psmux aliases and environment variable are available.
 │   ├── .bashrc
 │   ├── .gitconfig
 │   ├── .config/{nvim,shell,tmux}/
+│   ├── .omp/agent/agents/scout-exec.md
 │   └── .pixi/manifests/pixi-global.toml
 ├── hardware/
 │   └── keyboards/iris-rev7/
