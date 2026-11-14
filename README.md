@@ -32,8 +32,8 @@ grep -Ev '^\s*(#|$)' packages/system/debian.txt | xargs sudo apt-get install -y
 grep -Ev '^\s*(#|$)' machines/wsl-debian/packages/debian.txt | xargs sudo apt-get install -y
 ```
 
-Install the [standalone tools](packages/standalone.md), including Pixi, tmux,
-and Neovim, then:
+Install the [standalone tools](packages/standalone.md), including Pixi and
+Neovim, then:
 
 ```sh
 ./bootstrap.sh --machine wsl-debian  # later runs reuse the profile

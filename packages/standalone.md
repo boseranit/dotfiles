@@ -22,24 +22,6 @@ Neovim 0.12 supports.
 RTK v1 renamed `proxy` to `bypass`, removed `--ultra-compact`, and relicensed
 the default binary; the `rtk-oss` edition remains Apache-licensed.
 
-## tmux 3.8 (Debian / WSL)
-
-Backports may lag the [upstream release](https://github.com/tmux/tmux/releases/tag/3.8).
-Build it under `~/.local/opt`; `~/.local/bin` must precede `/usr/bin` on PATH:
-
-```sh
-sudo apt-get install -y bison libevent-dev libncurses-dev pkg-config
-cd "$(mktemp -d)"
-curl -fLO https://github.com/tmux/tmux/releases/download/3.8/tmux-3.8.tar.gz
-echo 'e79c699c7e949dccd0a4a125e17b8d1261e311b16979dbc8eb34542f3966d82e  tmux-3.8.tar.gz' | sha256sum -c -
-tar -xzf tmux-3.8.tar.gz && cd tmux-3.8
-./configure --prefix="$HOME/.local/opt/tmux-3.8" && make -j"$(nproc)" && make install
-mkdir -p ~/.local/bin && ln -sfn ~/.local/opt/tmux-3.8/bin/tmux ~/.local/bin/tmux
-```
-
-A running server keeps its version (`tmux display -p '#{version}'`) until it
-restarts.
-
 ## Neovim 0.12.6
 
 - Source: [GitHub release](https://github.com/neovim/neovim/releases/tag/v0.12.6)
