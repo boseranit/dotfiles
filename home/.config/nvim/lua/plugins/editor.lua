@@ -27,9 +27,15 @@ return {
     },
   },
   {
-    "mrjones2014/smart-splits.nvim",
+    "smart-splits-nvim/smart-splits.nvim",
     lazy = false,
-    opts = { default_amount = 3 },
+    dependencies = {
+      { "smart-splits-nvim/backend-tmux", main = "smart-splits-backend-tmux" },
+    },
+    opts = {
+      resize = { amount = 3 },
+      mux = { backend = vim.env.TMUX and "smart-splits-backend-tmux" or nil },
+    },
     keys = {
       { "<C-h>", function() require("smart-splits").move_cursor_left() end, desc = "Move to left pane" },
       { "<C-j>", function() require("smart-splits").move_cursor_down() end, desc = "Move to lower pane" },
