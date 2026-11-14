@@ -2,12 +2,12 @@ version = 1
 
 [envs.cli]
 channels = ["conda-forge"]
-dependencies = { gojq = "*", ripgrep = "*", fd-find = "*", lazygit = "*", pylatexenc = "*", tree-sitter-cli = "0.26.*" }
+dependencies = { gojq = "*", ripgrep = "*", fd-find = "*", lazygit = "*", pylatexenc = "*", tree-sitter-cli = "0.27.*" }
 exposed = { jq = "gojq", rg = "rg", fd = "fd", lazygit = "lazygit", latex2text = "latex2text", tree-sitter = "tree-sitter" }
 
 [envs.node]
 channels = ["conda-forge"]
-dependencies = { nodejs = "24.*" }
+dependencies = { nodejs = "26.*" }
 exposed = { node = "node", npm = "npm", npx = "npx" }
 
 [envs.ruff]

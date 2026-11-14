@@ -7,7 +7,8 @@ return {
   {
     "mason-org/mason-lspconfig.nvim",
     dependencies = {
-      { "mason-org/mason.nvim", opts = {} },
+      -- Prefer Pixi's Python tools over stale Mason executables.
+      { "mason-org/mason.nvim", opts = { PATH = "append" } },
       "neovim/nvim-lspconfig",
       "saghen/blink.cmp",
     },

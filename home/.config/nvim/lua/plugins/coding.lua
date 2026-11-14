@@ -1,10 +1,9 @@
 return {
   {
-    "neovim-treesitter/nvim-treesitter",
+    "nvim-treesitter/nvim-treesitter",
     branch = "main",
     lazy = false,
     build = ":TSUpdate",
-    dependencies = { "neovim-treesitter/treesitter-parser-registry" },
     config = function()
       -- tree-sitter-cli otherwise selects cl.exe for native Windows builds.
       -- Use Clang with the MinGW libraries supplied by Strawberry Perl when
