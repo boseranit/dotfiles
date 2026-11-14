@@ -111,7 +111,7 @@ else
 fi
 
 for path in .bashrc .gitconfig .config/shell .config/tmux \
-  .pixi/manifests/pixi-global.toml; do
+  .pixi/manifests/pixi-global.toml .omp/agent/agents/scout-exec.md; do
   link_path "$repo/home/$path" "$HOME/$path"
 done
 

@@ -24,9 +24,23 @@ function Install-ManagedPath {
 
     $item = Get-Item -LiteralPath $Target -Force -ErrorAction SilentlyContinue
     if ($null -ne $item) {
+        $linkTargets = $item.Target
+        if ($item.LinkType -eq 'HardLink') {
+            # PowerShell can report an empty Target for hard links.
+            $hardLinks = & fsutil.exe hardlink list $targetPath
+            if ($LASTEXITCODE -ne 0) {
+                throw "Cannot inspect hard links for $Target"
+            }
+            $volumeRoot = [IO.Path]::GetPathRoot($targetPath)
+            $linkTargets = $hardLinks | ForEach-Object {
+                Join-Path $volumeRoot ($_.Trim().TrimStart('\'))
+            }
+        }
+
         if ($item.LinkType -and
-            ($item.Target | Where-Object {
-                [IO.Path]::GetFullPath($_).Equals($sourcePath, $comparison)
+            ($linkTargets | Where-Object {
+                -not [string]::IsNullOrWhiteSpace($_) -and
+                    [IO.Path]::GetFullPath($_).Equals($sourcePath, $comparison)
             })) {
             Write-Host "Already linked $Target"
             return
@@ -83,6 +97,10 @@ $paths = @(
     @{
         Source = Join-Path $homeSource '.pixi\manifests\pixi-global.toml'
         Target = Join-Path $HOME '.pixi\manifests\pixi-global.toml'
+    },
+    @{
+        Source = Join-Path $homeSource '.omp\agent\agents\scout-exec.md'
+        Target = Join-Path $HOME '.omp\agent\agents\scout-exec.md'
     },
     @{
         Source = Join-Path $PSScriptRoot 'windows\terminal\settings.json'
