@@ -52,6 +52,10 @@ Ruff, is attached to the buffer.
 Ordinary yanks use the system clipboard, including through tmux or OSC 52 over
 display-less SSH.
 
+In Python, long lines can wrap on screen without inserting newlines as you
+type. When Ruff is attached, saving formats the buffer using the project's
+Ruff settings. `<leader>f` formats on demand.
+
 ## Search and movement
 
 | Key | Mode | Action |
