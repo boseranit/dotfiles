@@ -1,6 +1,7 @@
 # Home server
 
-Debian 13 (Trixie), x86-64. Select with:
+`vostro` runs Debian 13 (Trixie), x86-64. Use the `home-server` dotfiles
+profile:
 
 ```sh
 ./bootstrap.sh --machine home-server
@@ -15,10 +16,12 @@ Debian 13 (Trixie), x86-64. Select with:
 
 ## Services
 
-Service state belongs in a separate `homelab` repository. Reusable Compose
-definitions belong under `services/`; `hosts/home-server/` contains only
-service selection and host-specific mounts, ports, and networking. Secrets,
-volumes, and backups remain outside Git.
+This profile owns the login environment and the Linux host contract below:
+filesystem mounts, the collector's OS identity, and research backup storage.
+The [vostro runbook in homelab](https://github.com/boseranit/homelab/blob/main/hosts/vostro/README.md)
+owns which services run, how they are reached, which paths their data uses,
+and when application backups run. Service credentials and data are not
+stored in either repository.
 
 ## Data storage and ownership
 

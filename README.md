@@ -9,12 +9,13 @@ repository records desired state; it is not a bespoke installer.
 | --- | --- |
 | Shell, Neovim, tmux, Git, and OMP agent configuration | `home/` |
 | Portable CLI tools such as jq and ripgrep | `home/.pixi/manifests/pixi-global.toml` |
-| Essential OS packages | `packages/system/<distribution>.txt` |
+| Shared Debian admin packages | `packages/system/<distribution>.txt` |
 | Upstream standalone installers | `packages/standalone.md` |
 | Sparse per-machine differences | `machines/<machine>/` |
+| `vostro` host base: filesystem mounts, collector identity, and research Borg storage | [`machines/home-server/`](machines/home-server/README.md) |
 | Windows Terminal configuration | `windows/terminal/settings.json` |
 | Personal hardware configuration and runbooks | `hardware/` |
-| Services such as Immich and Seafile | A separate `homelab` repository |
+| Home-server deployments: service dependencies, Compose, WireGuard, ingress, app data paths, and app backup schedules | [homelab](https://github.com/boseranit/homelab) |
 | Secrets, data, caches, and installed binaries | Outside Git |
 
 `home/` mirrors paths below `$HOME`, including the OMP
