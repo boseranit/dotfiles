@@ -9,6 +9,7 @@ Debian 13 (Trixie), x86-64. Select with:
 ## Differences from the shared base
 
 - The shell exposes the server's crypto source, artifact, scratch, and archive roots.
+- `omp` runs in a user scope capped at 8 GiB without swap; at the cap the kernel kills its largest process.
 - Neovim omits VimTeX and custom TeX snippets.
 - `latexmk` is not installed.
 
